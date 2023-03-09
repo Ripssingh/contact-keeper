@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const { body, validationResult, check } = require("express-validator");
 const User = require("../models/User");
+
+
 //@route    POST api/users
 //@desc     Register a user
 //@access   Public
@@ -39,6 +41,7 @@ router.post(
       });
 
       const salt = await bcrypt.genSalt(10);
+	    const etc;
       user.password = await bcrypt.hash(password, salt);
       await user.save();
       const payload = {
